@@ -21,3 +21,26 @@ body {
   height: 100vh;
   margin: 0 auto;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 16px;
+  height: calc(100vh - 56px - 72px);
+}
+
+.nav-bar {
+  height: 56px;
+}
+
+.bottom-tap-bar {
+  height: 72px;
+}
+
+@media (max-width: 375px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
