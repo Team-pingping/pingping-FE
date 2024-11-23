@@ -35,5 +35,45 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/Users/choiseohee/Downloads/.AnySign4PC/
-/Users/choiseohee/Downloads/.CFUserTextEncoding
+# 사용자 홈 디렉터리 관련 파일들
+~*
+*.swp
+*.swo
+*.tmp
+*.log
+
+# macOS 관련
+.DS_Store
+.Trash/
+.localized
+
+# 다운로드 및 사용자 문서 디렉터리
+~/Downloads/
+~/Documents/
+~/Desktop/
+
+# 특정 확장자 파일 무시
+*.hwp
+*.png
+*.jpg
+*.mp4
+*.mov
+*.zip
+*.dmg
+*.pdf
+*.xlsx
+*.ai
+*.psd
+
+# 특정 디렉터리 무시
+/Applications/
+/Movies/
+/Music/
+/Pictures/
+/Public/
+
+# 기타 IDE/OS 생성 파일
+.idea/
+.vscode/
+node_modules/
+*.iml
