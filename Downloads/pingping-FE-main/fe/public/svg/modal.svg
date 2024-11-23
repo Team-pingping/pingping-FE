@@ -1,0 +1,18 @@
+<svg width="130" height="82" viewBox="0 0 130 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Asset 35 1">
+<g id="Layer 1">
+<path id="Vector" d="M64.9993 68H102.384C103.307 68 103.884 66.9884 103.422 66.1791L84.7302 33.393L66.0383 0.60698C65.5767 -0.202327 64.4229 -0.202327 63.9624 0.60698L45.2705 33.393L26.5775 66.1791C26.116 66.9884 26.6924 68 27.6155 68H65.0003H64.9993Z" fill="#F73A2C"/>
+<path id="Vector_2" d="M34.1812 63.9533C33.4138 63.9533 32.9324 63.1246 33.3124 62.458L64.13 8.40268C64.5137 7.72972 65.4838 7.72971 65.8675 8.40267L96.686 62.458C97.0661 63.1246 96.5847 63.9533 95.8173 63.9533H34.1812Z" fill="black"/>
+<path id="Vector_3" d="M39.3813 59.9074L64.9992 14.9727L90.618 59.9074H39.3813Z" fill="#F73A2C"/>
+<path id="Vector 11052" d="M62.6221 55.6496V50.8398H67.3772V55.6496H62.6221Z" fill="black"/>
+<path id="Vector 11051" d="M68.5658 29.7969H61.4331L63.2163 47.8333H66.7826L68.5658 29.7969Z" fill="black"/>
+</g>
+<ellipse id="Ellipse 5007" cx="65.0149" cy="77.4287" rx="44.9714" ry="4.35645" fill="url(#paint0_radial_3020_28285)"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_3020_28285" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(65.0149 77.4287) scale(44.9714 4.35645)">
+<stop stop-color="#717171"/>
+<stop offset="1" stop-color="#D8D8D8" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
