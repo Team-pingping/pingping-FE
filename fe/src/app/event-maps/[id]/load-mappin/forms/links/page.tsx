@@ -142,7 +142,6 @@ export default function LinksPage() {
         />
       </div>
 
-      {/* 바텀 시트 */}
       <BottomSheet />
     </div>
   );

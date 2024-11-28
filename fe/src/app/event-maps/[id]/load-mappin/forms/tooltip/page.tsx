@@ -101,11 +101,11 @@ export default function ToolTipPage() {
             alt="Example Screenshot"
             width={286}
             height={286}
-            className="w-full rounded-xl border border-[#f0f0f0]"
+            className="w-fix rounded-xl border border-[#f0f0f0]"
           />
         </div>
       </div>
-      <div className="w-full max-w-[500px] flex justify-center items-center gap-2 mb-[50px] mx-auto">
+      <div className="w-fix max-w-[500px] flex justify-center items-center gap-2 mb-[50px] mx-auto">
         {slides.map((slide) => (
           <div
             key={`slide-indicator-${slide.id}`}
@@ -117,7 +117,7 @@ export default function ToolTipPage() {
           />
         ))}
       </div>
-      <div className="w-full max-w-[500px] px-4 mx-auto">
+      <div className="w-fix max-w-[500px] px-4 mx-auto">
         <Button
           label="네이버 지도 바로 열기"
           onClick={() => {

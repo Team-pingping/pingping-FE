@@ -98,11 +98,10 @@ export default function LinkEditPage() {
   };
 
   const handleBack = () => {
-    setShowExitModal(true); // ExitModal을 표시
+    setShowExitModal(true); 
   };
 
   const handleExitConfirm = () => {
-    // 데이터 삭제 후 뒤로가기
     localStorage.removeItem("userData");
     localStorage.removeItem("formData");
     router.push(`/event-maps/${id}`);
@@ -121,14 +120,14 @@ export default function LinkEditPage() {
       <Navigation onBack={handleBack} />
 
       <div
-        className="flex-1 px-4 mt-[75px] overflow-y-auto"
+        className="flex-1 px-4 mt-[56px] overflow-y-auto"
         style={{
           maxHeight: "calc(100vh - 60px)",
           paddingBottom: "120px",
         }}
       >
         {userName && (
-          <div className="text-darkGray text-title-md">
+          <div className="text-darkGray mt-[16px] text-title-md">
             {userName}님의 맵핀 모음이에요
           </div>
         )}
