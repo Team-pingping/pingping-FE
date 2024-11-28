@@ -66,18 +66,17 @@ export default function ToolTipPage() {
       className="w-full h-screen bg-white flex flex-col items-center"
       {...handlers}
     >
-      {/* 고정된 넓이 설정 */}
       <div className="w-full max-w-[500px] px-4 mx-auto">
         <Navigation />
       </div>
-      <div className="w-full max-w-[500px] px-4 mx-auto mt-16 mb-[48px]">
+      <div className="w-[360px] px-4 mx-auto mt-16 mb-[48px]">
         <h1 className="text-[#2c2c2c] text-[22px] font-semibold font-['Pretendard'] leading-[30px]">
           이렇게 공유 버튼이 안 보이나요?
           <br />
           이렇게 하면 해결 완
         </h1>
       </div>
-      <div className="w-full max-w-[500px] px-4 mx-auto mb-[20px]">
+      <div className="w-fix max-w-[500px] px-4 mx-auto mb-[20px]">
         <div className="bg-[#F8F8F8] rounded-xl border border-[#F0F0F0] p-[20px]">
           {slides[currentSlide].step && (
             <div className="flex items-center gap-2 mb-2">
@@ -102,11 +101,11 @@ export default function ToolTipPage() {
             alt="Example Screenshot"
             width={286}
             height={286}
-            className="w-full rounded-xl border border-[#f0f0f0]"
+            className="w-fix rounded-xl border border-[#f0f0f0]"
           />
         </div>
       </div>
-      <div className="w-full max-w-[500px] flex justify-center items-center gap-2 mb-[50px] mx-auto">
+      <div className="w-fix max-w-[500px] flex justify-center items-center gap-2 mb-[50px] mx-auto">
         {slides.map((slide) => (
           <div
             key={`slide-indicator-${slide.id}`}
@@ -118,7 +117,7 @@ export default function ToolTipPage() {
           />
         ))}
       </div>
-      <div className="w-full max-w-[500px] px-4 mx-auto">
+      <div className="w-fix max-w-[500px] px-4 mx-auto">
         <Button
           label="네이버 지도 바로 열기"
           onClick={() => {
