@@ -98,7 +98,7 @@ export default function LinkEditPage() {
   };
 
   const handleBack = () => {
-    setShowExitModal(true); 
+    setShowExitModal(true);
   };
 
   const handleExitConfirm = () => {
