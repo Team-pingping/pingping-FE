@@ -55,6 +55,11 @@ export default function LinkField({
   const router = useRouter();
   const { id } = useParams();
 
+  const cleanURL = (url: string): string => {
+    const match = url.match(/https?:\/\/[^\s]+/);
+    return match ? match[0].trim() : "";
+  };
+
   useEffect(() => {
     const validLinks = inputFields
       .filter((field) => field.isValid)
@@ -114,15 +119,15 @@ export default function LinkField({
     try {
       const clipboardText = await navigator.clipboard.readText();
       if (clipboardText.trim()) {
+        const cleanedText = cleanURL(clipboardText);
         setInputFields((prevFields) =>
           prevFields.map((fieldItem) =>
             fieldItem.id === fieldId
-              ? { ...fieldItem, text: clipboardText, isValid: false }
+              ? { ...fieldItem, text: cleanedText, isValid: false }
               : fieldItem
           )
         );
-
-        validateLink(fieldId, clipboardText, label);
+        validateLink(fieldId, cleanedText, label);
       }
     } catch (error) {
       console.error("클립보드에서 텍스트를 읽는 데 실패했습니다:", error);
@@ -130,15 +135,15 @@ export default function LinkField({
   };
 
   const handleInputChange = (fieldId: string, inputValue: string) => {
+    const cleanedValue = cleanURL(inputValue); // URL 정리
     setInputFields((prevFields) =>
       prevFields.map((fieldItem) =>
         fieldItem.id === fieldId
-          ? { ...fieldItem, text: inputValue, isValid: false, isTyping: true }
+          ? { ...fieldItem, text: cleanedValue, isValid: false, isTyping: true }
           : fieldItem
       )
     );
-
-    validateLink(fieldId, inputValue, label);
+    validateLink(fieldId, cleanedValue, label);
   };
 
   const handleFocus = (fieldId: string) => {
