@@ -135,7 +135,7 @@ export default function LinkEditPage() {
       <div className="flex-1 px-[16px] w-full overflow-y-auto pb-[100px]">
         <div className="mt-[72px] mb-[36px]" />
         {userName && (
-          <div className="text-darkGray text-title-md">
+          <div className="text-darkGray mt-[16px] text-title-md">
             {userName}님의 맵핀 모음이에요
           </div>
         )}

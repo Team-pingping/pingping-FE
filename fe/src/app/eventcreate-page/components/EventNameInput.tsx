@@ -24,14 +24,15 @@ export default function EventNameInput({
 }: EventNameInputProps) {
   const [hasUserEdited, setHasUserEdited] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const showWarning = hasUserEdited && !isValidLength(cleanString(value), 1);
 
   useEffect(() => {
-    if (!hasUserEdited) {
+    if (!hasUserEdited && !value) {
       const newEventName: string = generateDefaultEventName(selectedLocation);
-      onChange(newEventName);
+      if (newEventName) {
+        onChange(newEventName);
+      }
     }
-  }, [selectedLocation, onChange, hasUserEdited]);
+  }, [selectedLocation, onChange, hasUserEdited, value]);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,8 @@ export default function EventNameInput({
     setHasUserEdited(true);
     onChange("");
   }, [onChange]);
+
+  const showWarning = hasUserEdited && !isValidLength(cleanString(value), 1);
 
   return (
     <div className={`relative flex flex-col mt-4 ${className}`}>
