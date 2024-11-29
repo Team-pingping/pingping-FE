@@ -135,15 +135,15 @@ export default function LinkField({
   };
 
   const handleInputChange = (fieldId: string, inputValue: string) => {
+    const cleanedValue = cleanURL(inputValue); // URL 정리
     setInputFields((prevFields) =>
       prevFields.map((fieldItem) =>
         fieldItem.id === fieldId
-          ? { ...fieldItem, text: inputValue, isValid: false, isTyping: true }
+          ? { ...fieldItem, text: cleanedValue, isValid: false, isTyping: true }
           : fieldItem
       )
     );
     validateLink(fieldId, cleanedValue, label);
-
   };
 
   const handleFocus = (fieldId: string) => {
