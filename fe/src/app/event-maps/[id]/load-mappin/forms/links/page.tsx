@@ -27,6 +27,11 @@ export default function LinksPage() {
     setIsFormComplete(isComplete);
   }, [mapLinks, storeLinks, isChecked, isSubmitting]);
 
+  const cleanURL = (url: string): string => {
+    const match = url.match(/https?:\/\/[^\s]+/);
+    return match ? match[0].trim() : "";
+  };
+
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
@@ -40,12 +45,15 @@ export default function LinksPage() {
       return;
     }
 
+    const cleanedMapLinks = mapLinks.map(cleanURL).filter(Boolean);
+    const cleanedStoreLinks = storeLinks.map(cleanURL).filter(Boolean);
+
     const requestBody = {
       uuid: id,
       name,
       password: pin,
-      bookmarkUrls: mapLinks,
-      storeUrls: storeLinks,
+      bookmarkUrls: cleanedMapLinks,
+      storeUrls: cleanedStoreLinks,
     };
 
     try {
