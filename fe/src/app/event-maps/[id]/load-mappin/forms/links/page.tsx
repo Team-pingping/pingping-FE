@@ -115,7 +115,6 @@ export default function LinksPage() {
             onChange={setStoreLinks}
           />
 
-          {/* 체크박스 */}
           <div className="flex items-center">
             <CheckBox isChecked={isChecked} onChange={handleCheckboxChange} />
             <span className="ml-2 text-[#8e8e8e] text-xs font-medium font-['Pretendard'] leading-none">
@@ -125,7 +124,6 @@ export default function LinksPage() {
         </form>
       </div>
 
-      {/* 하단 버튼 */}
       <div
         className="w-fix px-[16px] bg-white fixed py-[8px]"
         style={{ zIndex: 50 }}
@@ -133,12 +131,8 @@ export default function LinksPage() {
         <Button
           label="저장"
           onClick={handleSubmit}
-          className={`w-[328px] h-[60px] py-[17px] rounded-lg text-lg font-['Pretendard'] font-medium bg-[#F73A2C] text-white ${
-            isFormComplete && !isSubmitting
-              ? "bg-black"
-              : "bg-[#d9d9d9] cursor-not-allowed"
-          }`}
-          disabled={!isFormComplete || isSubmitting}
+          isSubmitting={isSubmitting}
+          isFormComplete={isFormComplete}
         />
       </div>
 

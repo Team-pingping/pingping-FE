@@ -18,9 +18,15 @@ export default function LinkEditPage() {
   const [isSaveButtonEnabled, setIsSaveButtonEnabled] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
 
   const router = useRouter();
   const { id, nonMemberId } = useParams();
+
+  const isValidLink = (link: string) => {
+    const urlPattern = /^(https?:\/\/[^\s]+)/g;
+    return urlPattern.test(link.trim());
+  };
 
   useEffect(() => {
     if (!id || !nonMemberId) {
@@ -41,8 +47,6 @@ export default function LinkEditPage() {
         );
         setUserName(parsedData.name || "");
         setUserData(parsedData);
-      } else {
-        console.warn("비회원 ID가 일치하지 않습니다.");
       }
     } else {
       setMapLinks(userData.bookmarkUrls.length ? userData.bookmarkUrls : [""]);
@@ -54,8 +58,10 @@ export default function LinkEditPage() {
   }, [id, nonMemberId, setUserData, userData, router]);
 
   useEffect(() => {
-    const allMapLinksValid = mapLinks.every((link) => link.trim() !== "");
-    const allStoreLinksValid = storeLinks.every((link) => link.trim() !== "");
+    const allMapLinksValid = mapLinks.length > 0 && mapLinks.every(isValidLink);
+    const allStoreLinksValid =
+      storeLinks.length > 0 && storeLinks.every(isValidLink);
+
     const isComplete = (allMapLinksValid || allStoreLinksValid) && isChecked;
     setIsSaveButtonEnabled(isComplete);
   }, [mapLinks, storeLinks, isChecked]);
@@ -63,14 +69,11 @@ export default function LinkEditPage() {
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
-    const filteredMapLinks = mapLinks.filter((link) => link.trim() !== "");
-    const filteredStoreLinks = storeLinks.filter((link) => link.trim() !== "");
-
     const updatedData = {
       nonMemberId: userData.nonMemberId || Number(nonMemberId),
       name: userName,
-      bookmarkUrls: filteredMapLinks,
-      storeUrls: filteredStoreLinks,
+      bookmarkUrls: mapLinks,
+      storeUrls: storeLinks,
     };
 
     try {
@@ -91,6 +94,7 @@ export default function LinkEditPage() {
 
       setUserData(updatedData);
       localStorage.setItem("userData", JSON.stringify(updatedData));
+
       router.push(`/event-maps/${id}`);
     } catch (error) {
       console.error("API 호출 오류:", error);
@@ -101,7 +105,7 @@ export default function LinkEditPage() {
     setShowExitModal(true);
   };
 
-  const handleExitConfirm = () => {
+  const handleExit = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("formData");
     router.push(`/event-maps/${id}`);
@@ -115,17 +119,21 @@ export default function LinkEditPage() {
     return <div />;
   }
 
+  // Button class 설정
+  let buttonClass =
+    "w-fixl h-[60px] py-[17px] rounded-lg text-base font-medium text-white";
+
+  if (isSaveButtonEnabled) {
+    buttonClass += isClicked ? " bg-[#000000]" : " bg-[#1D1D1D]";
+  } else {
+    buttonClass += " bg-[#e0e0e0] cursor-not-allowed";
+  }
+
   return (
     <div className="w-[360px] h-screen bg-white mx-auto flex flex-col">
       <Navigation onBack={handleBack} />
-
-      <div
-        className="flex-1 px-4 mt-[56px] overflow-y-auto"
-        style={{
-          maxHeight: "calc(100vh - 60px)",
-          paddingBottom: "120px",
-        }}
-      >
+      <div className="flex-1 px-[16px] w-full overflow-y-auto pb-[100px]">
+        <div className="mt-[72px] mb-[36px]" />
         {userName && (
           <div className="text-darkGray mt-[16px] text-title-md">
             {userName}님의 맵핀 모음이에요
@@ -165,17 +173,16 @@ export default function LinkEditPage() {
       >
         <Button
           label="저장"
-          className={`w-[328px] h-[60px] py-[17px] rounded-lg text-lg font-['Pretendard'] font-medium bg-[#F73A2C] text-white ${
-            isSaveButtonEnabled
-              ? "bg-black"
-              : "bg-[#e0e0e0] pointer-events-none"
-          }`}
-          onClick={handleSubmit}
+          className={buttonClass}
+          onClick={() => {
+            setIsClicked(true);
+            handleSubmit();
+          }}
           disabled={!isSaveButtonEnabled}
         />
       </div>
       {showExitModal && (
-        <ExitModal onCancel={handleCancel} onExit={handleExitConfirm} />
+        <ExitModal onCancel={handleCancel} onExit={handleExit} />
       )}
     </div>
   );

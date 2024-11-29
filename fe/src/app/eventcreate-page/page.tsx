@@ -74,12 +74,8 @@ function EventCreatePage() {
           label="다음"
           type="next"
           onClick={handleNextClick}
-          className={`w-[328px] h-[60px] py-[17px] rounded-lg text-lg font-['Pretendard'] font-medium ${
-            isFormComplete && !isSubmitting
-              ? "bg-black text-white"
-              : "bg-[#E4E4E4] text-[#8E8E8E]"
-          }`}
           disabled={!isFormComplete || isSubmitting}
+          isSubmitting={isSubmitting}
         />
       </div>
     </div>

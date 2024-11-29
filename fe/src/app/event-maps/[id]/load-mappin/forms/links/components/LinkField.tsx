@@ -5,11 +5,13 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 
-interface LinkFieldEditProps {
+interface LinkFieldProps {
   label: string;
   placeholder: string;
   value: string[];
   onChange: (value: string[]) => void;
+  showTooltip?: boolean;
+  onInfoClick?: () => void;
 }
 
 interface InputField {
@@ -18,14 +20,15 @@ interface InputField {
   error: string;
   isValid: boolean;
   isTyping: boolean;
+  canEdit: boolean;
 }
 
-export default function LinkFieldEdit({
+export default function LinkField({
   label,
   placeholder,
   value,
   onChange,
-}: LinkFieldEditProps) {
+}: LinkFieldProps) {
   const [inputFields, setInputFields] = useState<InputField[]>(
     value.length > 0
       ? value.map((val) => ({
@@ -34,6 +37,7 @@ export default function LinkFieldEdit({
           error: "",
           isValid: true,
           isTyping: false,
+          canEdit: true,
         }))
       : [
           {
@@ -42,6 +46,7 @@ export default function LinkFieldEdit({
             error: "",
             isValid: false,
             isTyping: false,
+            canEdit: true,
           },
         ]
   );
@@ -56,11 +61,6 @@ export default function LinkFieldEdit({
       .map((field) => field.text);
     onChange(validLinks);
   }, [inputFields, onChange]);
-
-  const cleanURL = (url: string): string => {
-    const match = url.match(/https?:\/\/[^\s]+/);
-    return match ? match[0].trim() : "";
-  };
 
   const validateLink = async (fieldId: string, url: string, type: string) => {
     const endpoint =
@@ -113,17 +113,16 @@ export default function LinkFieldEdit({
   const handlePasteFromClipboard = async (fieldId: string) => {
     try {
       const clipboardText = await navigator.clipboard.readText();
-      const cleanedValue = cleanURL(clipboardText);
-      if (cleanedValue) {
+      if (clipboardText.trim()) {
         setInputFields((prevFields) =>
           prevFields.map((fieldItem) =>
             fieldItem.id === fieldId
-              ? { ...fieldItem, text: cleanedValue, isValid: false }
+              ? { ...fieldItem, text: clipboardText, isValid: false }
               : fieldItem
           )
         );
 
-        validateLink(fieldId, cleanedValue, label);
+        validateLink(fieldId, clipboardText, label);
       }
     } catch (error) {
       console.error("클립보드에서 텍스트를 읽는 데 실패했습니다:", error);
@@ -131,18 +130,15 @@ export default function LinkFieldEdit({
   };
 
   const handleInputChange = (fieldId: string, inputValue: string) => {
-    const cleanedValue = cleanURL(inputValue); // URL 정리
     setInputFields((prevFields) =>
       prevFields.map((fieldItem) =>
         fieldItem.id === fieldId
-          ? { ...fieldItem, text: cleanedValue, isValid: false, isTyping: true }
+          ? { ...fieldItem, text: inputValue, isValid: false, isTyping: true }
           : fieldItem
       )
     );
 
-    if (cleanedValue) {
-      validateLink(fieldId, cleanedValue, label);
-    }
+    validateLink(fieldId, inputValue, label);
   };
 
   const handleFocus = (fieldId: string) => {
@@ -172,6 +168,7 @@ export default function LinkFieldEdit({
         error: "",
         isValid: false,
         isTyping: false,
+        canEdit: true,
       },
     ]);
   };
@@ -248,9 +245,7 @@ export default function LinkFieldEdit({
         {inputFields.map((item, index) => (
           <div
             key={item.id}
-            className={`relative w-full ${
-              index === inputFields.length - 1 ? "" : "mb-[16px]"
-            }`}
+            className={`relative w-full ${index === inputFields.length - 1 ? "" : "mb-[16px]"}`}
           >
             <div
               className={`w-[296px] h-[52px] px-4 py-3.5 pr-[40px] rounded-md inline-flex relative ${getClassNames(
