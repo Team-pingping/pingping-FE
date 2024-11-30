@@ -13,7 +13,7 @@ function LoadingPage() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-black text-white px-[14.17px] max-w-[400px] mx-auto">
+    <div className="flex flex-col items-center min-h-screen bg-black text-white px-[14.17px] mx-auto">
       <div className="mt-[32px]" />
 
       <div className="w-full h-[0px] border-t-[1px] border-white mb-[16px]" />
