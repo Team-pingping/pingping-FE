@@ -91,6 +91,22 @@ export default function Page() {
     }
   }, [id, data, moveToLocation, setCustomMarkers]);
 
+  useEffect(() => {
+    // 뒤로 가기 버튼을 눌렀을 때 새로고침하기
+    const handlePopState = () => {
+      // 새로고침을 강제하는 방법
+      window.location.reload();
+    };
+
+    // onpopstate 이벤트 리스너 추가
+    window.addEventListener("popstate", handlePopState);
+
+    // 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
   const handleBackbtn = () => {
     router.replace("/eventcreate-page");
   };
