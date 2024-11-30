@@ -18,7 +18,7 @@ export default function BottomSheet() {
 
   return (
     <div
-      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[400px] min-w-[400px] h-[556px] bg-[#1d1d1d] rounded-t-[20px] transition-transform z-[1000] duration-700 ${
+      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full h-[556px] bg-[#1d1d1d] rounded-t-[20px] transition-transform z-[1000] duration-700 ${
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
     >
