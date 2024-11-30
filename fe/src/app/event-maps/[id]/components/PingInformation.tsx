@@ -215,7 +215,7 @@ export default function PingInformaion() {
         type="button"
         className="bg-danger-base rounded-small text-white w-full mt-[16px] h-[48px]"
         onClick={() => {
-          window.location.href = selectedPing.url;
+          window.open(selectedPing.url);
         }}
       >
         자세히 보러 가기
