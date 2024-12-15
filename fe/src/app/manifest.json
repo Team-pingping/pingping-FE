@@ -1,5 +1,4 @@
 {
-  "name": "App",
   "icons": [
     {
       "src": "/ico/android-icon-36x36.png",
@@ -37,5 +36,16 @@
       "type": "image/png",
       "density": "4.0"
     }
-  ]
+
+  ],
+  "orientation": "any",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "ko-KR",
+  "name": "moping",
+  "short_name": "모핑",
+  "start_url": "https://moping.co.kr",
+  "description": "모일 때 맵핀, MOPING",
+  "theme_color": "#000000",
+  "background_color": "#000000"
 }
