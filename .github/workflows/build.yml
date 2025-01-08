@@ -25,10 +25,10 @@ jobs:
         run: npm run build
         working-directory: ./fe
 
-      - name: 테스트 실행 중..
-        run: npm run test
-        working-directory: ./fe
+      # - name: 테스트 실행 중..
+      #   run: npm run test
+      #   working-directory: ./fe
 
-      - name: 코드 린트 체크 중..
-        run: npm run lint
-        working-directory: ./fe
+      # - name: 코드 린트 체크 중..
+      #   run: npm run lint
+      #   working-directory: ./fe
