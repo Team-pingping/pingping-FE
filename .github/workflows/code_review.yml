@@ -22,7 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+        working-directory: ./fe
+        
       - name: Run GPT-based Code Review
         uses: anc95/ChatGPT-CodeReview@main
         with:
