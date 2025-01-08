@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   build:
@@ -17,13 +17,18 @@ jobs:
         with:
           node-version: '18.18.2'
 
-      - name: pnpm 설치중..
-        run: npm install -g pnpm
-
       - name: 종속성 설치중...
-        run: pnpm install
+        run: npm install
         working-directory: ./fe
 
       - name: 빌드 중..
-        run: pnpm build
+        run: npm run build
         working-directory: ./fe
+
+      # - name: 테스트 실행 중..
+      #   run: npm run test
+      #   working-directory: ./fe
+
+      # - name: 코드 린트 체크 중..
+      #   run: npm run lint
+      #   working-directory: ./fe
