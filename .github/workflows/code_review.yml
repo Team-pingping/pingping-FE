@@ -1,0 +1,32 @@
+name: Code Review
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        # actions/checkout의 최신 버전 사용
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Node.js의 최신 LTS 버전으로 업데이트
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run GPT-based Code Review
+        uses: anc95/ChatGPT-CodeReview@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LANGUAGE: 'TypeScript' # 프로젝트의 언어를 TypeScript로 설정
+          MAX_COMMENTS: 5 # 리뷰어가 생성할 최대 코멘트 수
