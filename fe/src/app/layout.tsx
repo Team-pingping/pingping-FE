@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import React, { ReactNode } from "react";
 import ClientStorageHandler from "./components/ClientStorageHandler";
+import MSWComponent from "./mocks/MSWComponent";
 
 export const metadata = {
   title: "Moping!",
@@ -134,7 +135,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <ClientStorageHandler />
-        {children}
+        {/* MSWComponent 추가: children을 MSW 컴포넌트로 감쌈 */}
+        <MSWComponent>{children}</MSWComponent>
       </body>
     </html>
   );

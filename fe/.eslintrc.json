@@ -46,6 +46,14 @@
     "no-restricted-syntax": "off",
     "no-alert": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/src/app/mocks/**" // mocks 디렉토리 내에서는 devDependencies 허용
+        ]
+      }
+    ]
   }
 }
