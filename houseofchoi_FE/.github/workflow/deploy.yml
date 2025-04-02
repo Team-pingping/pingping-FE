@@ -1,0 +1,36 @@
+name: Build and Push to Fork
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js & PNPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install PNPM
+        run: npm install -g pnpm
+
+      - name: Run build.sh
+        run: sh ./build.sh
+
+      - name: Push to fork repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.AUTH_TOKEN }}
+        with:
+          source-directory: 'output'
+          destination-github-username: karnelll                      
+          destination-repository-name: houseofchoi-FE                
+          user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
+          commit-message: "[deploy] 자동 푸시: 팀 → 개인 레포로 빌드 결과 전송"
+          target-branch: main
