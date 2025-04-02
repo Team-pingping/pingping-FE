@@ -1,0 +1,9 @@
+path: /Users/choiseohee/Desktop/data
+train: images/train
+val: images/val
+nc: 11
+names: [
+  'Class_0', 'Class_1', 'Class_2', 'Class_3', 'Class_4',
+  'Class_5', 'Class_6', 'Class_7', 'Class_8', 'Class_9',
+  'Class_10'
+]
